@@ -8,8 +8,11 @@
 - https://bailian.console.aliyun.com/?tab=doc#/doc
 ---
 
+### 全局安装
+```
 npm install cool-commit -g
 
+```
 
 ### 配置环境变量
 1. vim ~/.zshrc
