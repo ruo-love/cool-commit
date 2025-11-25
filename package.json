@@ -1,10 +1,14 @@
 {
   "name": "cool-commit",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "type": "module",
   "readme": "README.md",
   "bin": {
     "cool": "./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruo-love/cool-commit"
   },
   "dependencies": {
     "@inquirer/prompts": "^5.0.3",
