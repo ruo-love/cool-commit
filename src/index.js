@@ -16,6 +16,7 @@ const config = getConfig()
 import { generateCommitMessage } from "./ai.js";
 
 const program = new Command();
+
 // 捕获 Ctrl+C
 process.on("SIGINT", () => {
   console.log("\n👋 已取消操作");
@@ -30,6 +31,8 @@ process.on("uncaughtException", (err) => {
   }
   throw err;
 });
+
+// 手动
 program
   .command("m [prefix]")
   .description("Auto AI commit & push")
@@ -92,6 +95,8 @@ program
     }
   });
 
+
+// 自动
 program
   .command("g [prefix]")
   .description("Auto AI commit & push")
