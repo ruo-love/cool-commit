@@ -16,16 +16,28 @@ const config = getConfig()
 import { generateCommitMessage } from "./ai.js";
 
 const program = new Command();
+// 捕获 Ctrl+C
+process.on("SIGINT", () => {
+  console.log("\n👋 已取消操作");
+  process.exit(0);
+});
 
+// 捕获 Inquirer 的 ExitPromptError
+process.on("uncaughtException", (err) => {
+  if (err.name === "ExitPromptError") {
+    console.log("\n👋 已取消操作");
+    process.exit(0);
+  }
+  throw err;
+});
 program
-  .command("m")
+  .command("m [prefix]")
   .description("Auto AI commit & push")
-  .action(async () => {
+  .action(async (prefix="feat") => {
     if (!await isGitRepo()) {
       console.log(chalk.red("❌ 当前目录不是一个 Git 仓库"));
       process.exit(1);
     }
-
     const lang = await select({
       message: '请选择 commit 信息语言：',
       choices: [
@@ -56,7 +68,10 @@ program
     }
 
     spinner.text = "Generating AI commit message...";
-    let commitMessage = await generateCommitMessage(diff, lang);
+    let commitMessage = await generateCommitMessage(diff, {
+        lang,
+        prefix
+      });
 
     spinner.succeed("Commit Message:");
     console.log(chalk.green(`\n${commitMessage}\n`));
@@ -78,15 +93,13 @@ program
   });
 
 program
-  .command("g")
+  .command("g [prefix]")
   .description("Auto AI commit & push")
-  .action(async () => {
+  .action(async (prefix="feat") => {
     if (!await isGitRepo()) {
       console.log(chalk.red("❌ 当前目录不是一个 Git 仓库"));
       process.exit(1);
     }
-
- 
     const spinner = ora("Collecting git diff...").start();
 
     const _git_diff = await getGitDiff();
@@ -99,7 +112,10 @@ program
     async function todo(){
       spinner.text = "Generating AI commit message...";
       spinner.start("Generating")
-      let commitMessage = await generateCommitMessage(diff, config.lang);
+      let commitMessage = await generateCommitMessage(diff, {
+        lang:config.lang,
+        prefix
+      });
       spinner.stop()
       spinner.succeed("Commit Message:");
       console.log(chalk.green(`\n${commitMessage}\n`));

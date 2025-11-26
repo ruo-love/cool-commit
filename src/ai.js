@@ -12,15 +12,18 @@ const client = new OpenAI({
 
 const MODEL = process.env.QWEN_MODEL || "qwen-turbo";
 
-export async function generateCommitMessage(diff, lang = "en") {
-  const languageInstruction = lang === "zh" 
+export async function generateCommitMessage(diff,options={
+  lang: "en",
+  prefix: "feat"
+}) {
+  const languageInstruction = options.lang === "zh" 
     ? "请将 commit message 用简洁、专业的中文生成"
     : "Please generate the commit message in English";
 
   const prompt = `
 你是一个资深程序员，请根据下面的 git diff 自动生成高质量 commit message。
 要求：
-1. 使用 Conventional Commit 格式 (feat / fix / chore / refactor ...)
+1. 使用 Conventional Commit 格式以"${options.prefix}: " 开头
 2. 保持简洁、语义清晰
 3. 不要解释，不要生成多余文本
 4. ${languageInstruction}
