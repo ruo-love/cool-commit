@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { getConfig } from './config.js';
-import getPrompt from "./prompt.js";
+import getPrompt,{getStyleMessage} from "./prompt.js";
 const config = getConfig()
 if (!config.apiKey) {
   console.error("❌ 缺少 API Key，请设置 COOL_COMMIT_API_KEY 环境变量");
@@ -13,7 +13,10 @@ const client = new OpenAI({
 
 const MODEL = process.env.QWEN_MODEL || "qwen-turbo";
 
-export async function generateCommitMessage(diff,options={lang: "en",prefix: "feat"}) {
+export async function generateCommitMessage(diff,options={lang: "en",prefix: "feat",message:""}) {
+  if(options.message){
+    return getStyleMessage(options)
+  }
   const prompt=getPrompt({
     diff,
     ...options

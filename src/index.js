@@ -34,9 +34,9 @@ process.on("uncaughtException", (err) => {
 
 // 手动
 program
-  .command("m [prefix]")
+  .command("m [prefix] [message]")
   .description("Auto AI commit & push")
-  .action(async (prefix="feat") => {
+  .action(async (prefix="feat",message="") => {
     if (!await isGitRepo()) {
       console.log(chalk.red("❌ 当前目录不是一个 Git 仓库"));
       process.exit(1);
@@ -73,7 +73,8 @@ program
     spinner.text = "Generating AI commit message...";
     let commitMessage = await generateCommitMessage(diff, {
         lang,
-        prefix
+        prefix,
+        message
       });
 
     spinner.succeed("Commit Message:");
@@ -98,9 +99,9 @@ program
 
 // 自动
 program
-  .command("g [prefix]")
+  .command("g [prefix] [message]")
   .description("Auto AI commit & push")
-  .action(async (prefix="feat") => {
+  .action(async (prefix="feat",message="") => {
     if (!await isGitRepo()) {
       console.log(chalk.red("❌ 当前目录不是一个 Git 仓库"));
       process.exit(1);
@@ -119,7 +120,8 @@ program
       spinner.start("Generating")
       let commitMessage = await generateCommitMessage(diff, {
         lang:config.lang,
-        prefix
+        prefix,
+        message
       });
       spinner.stop()
       spinner.succeed("Commit Message:");

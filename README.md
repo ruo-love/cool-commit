@@ -29,15 +29,15 @@ npm install cool-commit -g
 
 ### 快捷命令如下《自选》：
 
-1. cool g [prefix]
-2. cool m [prefix]
+1. cool g [prefix] [message]
+2. cool m [prefix] [message]
 
 
 - 如：
     - cool g fix
-    - cool g feat
+    - cool g feat 测试代码
     - cool m fix
-    - cool m feat
+    - cool m feat 隐藏按钮
 
 ### 示例
 
