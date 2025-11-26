@@ -1,5 +1,7 @@
 function getPrompt(options){
     const {lang,prefix,diff} = options;
+    const date = new Date()
+    const updateTime = date.toLocaleString()
     return `
     你是一个资深程序员，请根据下面的 git diff 自动生成高质量 commit message。
     要求：
@@ -7,6 +9,7 @@ function getPrompt(options){
     2. 保持简洁、语义清晰
     3. 不要解释，不要生成多余文本
     4. 请将 commit message 用简洁、专业的${lang}语音生成"
+    5. commit 以"【⏰】：${updateTime}"结尾
     === DIFF START ===
     ${diff}
     === DIFF END ===
