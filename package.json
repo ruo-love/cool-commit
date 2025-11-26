@@ -1,6 +1,6 @@
 {
   "name": "cool-commit",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "type": "module",
   "readme": "README.md",
   "bin": {

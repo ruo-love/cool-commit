@@ -53,7 +53,10 @@ function getPrompt(options){
     2. commit 以" <⏰ ${updateTime}> "结尾,时间格式 YYYY-MM-DD mm:hh:ss
     3. 保持简洁、语义清晰,不要出现换行
     4. 不要解释，不要生成多余文本
-    5. 请将 commit message 用简洁、专业的${lang}语音生成"
+    5. 示例：
+      💻feat: 移除多余的功能 <⏰ 2025-11-26 07:14:43>
+      🔧fix: 修复录音问题 <⏰ 2025-11-26 07:14:43>
+    6. 请将 commit message 用简洁、专业的${lang}语音生成"
     === DIFF START ===
     ${diff}
     === DIFF END ===
