@@ -29,8 +29,8 @@ npm install cool-commit -g
 
 ### 快捷命令如下《自选》：
 
-1. cool g <prefix>
-2. cool m <prefix>
+1. cool g [prefix]
+2. cool m [prefix]
 
 
 - 如：
