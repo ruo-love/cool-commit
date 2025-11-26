@@ -46,7 +46,6 @@ function getPrompt(options){
     const date = new Date()
     const updateTime = date.toLocaleString()
     const prefix_icon = getIcon(prefix)+prefix 
-    console.log("prefix_icon",)
     return `
     你是一个资深程序员，请根据下面的 git diff 自动生成高质量 commit message。
     要求：
