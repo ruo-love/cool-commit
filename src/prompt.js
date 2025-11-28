@@ -59,7 +59,7 @@ function getPrompt(options){
     5. 示例：
       ✨feat: 移除多余的功能 <🐥 2025-11-26 07:14:43>
       🔧fix: 修复录音问题 <🐥 2025-11-26 07:14:43>
-    6. 请将 commit message 用简洁、专业的${lang}语音生成"
+    6. 请将 commit message 用简洁、专业的${lang}语言生成"
     === DIFF START ===
     ${diff}
     === DIFF END ===
