@@ -3,7 +3,7 @@ import { getConfig } from './config.js';
 import getPrompt,{getStyleMessage} from "./prompt.js";
 const config = getConfig()
 if (!config.apiKey) {
-  console.error("❌ 缺少 API Key，请设置 COOL_COMMIT_API_KEY 环境变量");
+  console.error("❌ 缺少 API Key，请设置 COOL_COMMIT_DASHSCOPE_API_KEY 环境变量");
   process.exit(1);
 }
 const client = new OpenAI({
