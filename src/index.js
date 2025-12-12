@@ -3,6 +3,9 @@ import { Command } from "commander";
 import chalk from "chalk";
 import ora from "ora";
 import { select } from '@inquirer/prompts';
+import figlet from 'figlet';
+import {instagram} from 'gradient-string';
+
 import {
   getGitDiff,
   getStagedDiff,
@@ -12,11 +15,15 @@ import {
   isGitRepo
 } from "./git.js";
 import { getConfig } from './config.js';
-const config = getConfig()
 import { generateCommitMessage } from "./ai.js";
-
+const config = getConfig()
+const DEFAULT_FIGLET_OPTS = {
+  width: 200,
+  whitespaceBreak: false,
+};
 const program = new Command();
-
+const output = figlet.textSync("cool-commit", DEFAULT_FIGLET_OPTS);
+console.log(instagram(output));
 // 捕获 Ctrl+C
 process.on("SIGINT", () => {
   console.log("\n👋 已取消操作");

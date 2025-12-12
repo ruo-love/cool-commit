@@ -1,6 +1,6 @@
 {
   "name": "cool-commit",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "type": "module",
   "readme": "README.md",
   "bin": {
@@ -16,6 +16,8 @@
     "commander": "^12.0.0",
     "dotenv": "^16.0.0",
     "execa": "^8.0.0",
+    "figlet": "^1.9.4",
+    "gradient-string": "^3.0.0",
     "openai": "^4.0.0",
     "ora": "^8.0.0"
   }
