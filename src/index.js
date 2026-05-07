@@ -2,9 +2,9 @@
 import { Command } from "commander";
 import chalk from "chalk";
 import ora from "ora";
-import { select } from '@inquirer/prompts';
+import inquirer from 'inquirer';
 import figlet from 'figlet';
-import {instagram} from 'gradient-string';
+import gradientString from 'gradient-string';
 
 import {
   getGitDiff,
@@ -23,20 +23,11 @@ const DEFAULT_FIGLET_OPTS = {
 };
 const program = new Command();
 const output = figlet.textSync("cool-commit", DEFAULT_FIGLET_OPTS);
-console.log(instagram(output));
+console.log(gradientString.instagram(output));
 // 捕获 Ctrl+C
 process.on("SIGINT", () => {
   console.log("\n👋 已取消操作");
   process.exit(0);
-});
-
-// 捕获 Inquirer 的 ExitPromptError
-process.on("uncaughtException", (err) => {
-  if (err.name === "ExitPromptError") {
-    console.log("\n👋 已取消操作");
-    process.exit(0);
-  }
-  throw err;
 });
 
 // 手动
@@ -48,24 +39,27 @@ program
       console.log(chalk.red("❌ 当前目录不是一个 Git 仓库"));
       process.exit(1);
     }
-    const lang = await select({
+    const { lang } = await inquirer.prompt([{
+      type: 'list',
+      name: 'lang',
       message: '请选择 commit 信息语言：',
       choices: [
         { name: 'English（默认）', value: 'en' },
         { name: '中文', value: 'zh' }
       ],
       default: 'en'
-    });
+    }]);
 
-    const pushWay = await select({
+    const { pushWay } = await inquirer.prompt([{
+      type: 'list',
+      name: 'pushWay',
       message: '请选择 push 方式：',
       choices: [
         { name: '手动 push', value: 'manual' },
         { name: '自动 push', value: 'auto' },
-        
       ],
       default: 'manual'
-    });
+    }]);
     const autoPush = pushWay === 'auto';
     const spinner = ora("Collecting git diff...").start();
 
@@ -134,7 +128,9 @@ program
       spinner.succeed("Commit Message:");
       console.log(chalk.green(`\n${commitMessage}\n`));
       await gitAddAll();
-      const action = await select({
+      const { action } = await inquirer.prompt([{
+        type: 'list',
+        name: 'action',
         message: '操作',
         choices: [
           { name: '提交commit', value: '1' },
@@ -142,7 +138,7 @@ program
           { name: '取消commit', value: '3' }
         ],
         default: '1'
-      });
+      }]);
       switch(action){
         case "1":
           gitCommit(commitMessage)

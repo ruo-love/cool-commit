@@ -14,7 +14,7 @@ npm install cool-commit -g
 
 ```
 
-### 配置环境变量
+### 配置环境变 量
 1. vim ~/.zshrc
 2. 
     ```
