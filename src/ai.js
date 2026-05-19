@@ -22,15 +22,27 @@ export async function generateCommitMessage(diff,options={lang: "en",prefix: "fe
   const prompt=getPrompt({
     diff,
     ...options
-  }); 
-  const res = await openai.createChatCompletion({
-    model: MODEL,
-    messages: [
-      { role: "system", content: "You generate git commit messages." },
-      { role: "user", content: prompt }
-    ],
-    max_tokens: 100
   });
 
-  return res.data.choices[0].message.content.trim();
+  try {
+    const res = await openai.createChatCompletion({
+      model: MODEL,
+      messages: [
+        { role: "system", content: "You generate git commit messages." },
+        { role: "user", content: prompt }
+      ],
+      max_tokens: 100
+    });
+
+    return res.data.choices[0].message.content.trim();
+  } catch (error) {
+    const reason =
+      error?.response?.data?.message ||
+      error?.response?.statusText ||
+      error?.code ||
+      error?.message ||
+      "unknown error";
+
+    throw new Error(`生成 commit message 失败：${reason}`);
+  }
 }

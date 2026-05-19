@@ -1,5 +1,4 @@
-import _execa from "execa";
-const { execa } = _execa;
+import execa from "execa";
 
 export async function getGitDiff() {
   const { stdout } = await execa("git", ["diff"]);
