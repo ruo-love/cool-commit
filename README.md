@@ -55,7 +55,7 @@ COOL_COMMIT_AI_API_KEY=your-api-key
 1. vim ~/.zshrc
 2. 
     ```
-    export COOL_COMMIT_AI_PROVIDER="openai"
+    export COOL_COMMIT_AI_PROVIDER="dashscope"
     export COOL_COMMIT_AI_API_KEY="api-key"
     export COOL_COMMIT_LANG="en"
 
@@ -67,13 +67,13 @@ COOL_COMMIT_AI_API_KEY=your-api-key
 ### Windows
 如果你用 PowerShell，临时设置当前窗口可这样写：
  ```
-    $env:COOL_COMMIT_AI_PROVIDER="openai"
+    $env:COOL_COMMIT_AI_PROVIDER="dashscope"
     $env:COOL_COMMIT_AI_API_KEY="你的-api-key"
     $env:COOL_COMMIT_LANG="zh"
  ```
 如果想长期生效，可以执行：
  ```
-    [System.Environment]::SetEnvironmentVariable("COOL_COMMIT_AI_PROVIDER", "openai", "User")
+    [System.Environment]::SetEnvironmentVariable("COOL_COMMIT_AI_PROVIDER", "dashscope", "User")
     [System.Environment]::SetEnvironmentVariable("COOL_COMMIT_AI_API_KEY", "你的-api-key", "User")
     [System.Environment]::SetEnvironmentVariable("COOL_COMMIT_LANG", "zh", "User")
  ```
