@@ -11,7 +11,7 @@ function createClient() {
   }
 
   if (!config.model) {
-    throw new Error("缺少 AI 模型配置，请设置 COOL_COMMIT_AI_MODEL 环境变量");
+    throw new Error(`provider "${config.provider}" 缺少 model 配置，请检查 provider preset`);
   }
 
   const configuration = new Configuration({

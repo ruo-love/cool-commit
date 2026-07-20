@@ -84,8 +84,8 @@ export function getConfig() {
   return {
     provider,
     apiKey: (process.env.COOL_COMMIT_AI_API_KEY || "").trim(),
-    baseURL: (process.env.COOL_COMMIT_AI_BASE_URL || preset.baseURL).trim(),
-    model: (process.env.COOL_COMMIT_AI_MODEL || preset.model).trim(),
+    baseURL: preset.baseURL,
+    model: preset.model,
     lang: (process.env.COOL_COMMIT_LANG || "en").trim().toLowerCase(),
   };
 }

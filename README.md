@@ -22,26 +22,32 @@ npm install cool-commit -g
 ```env
 COOL_COMMIT_AI_PROVIDER=dashscope
 COOL_COMMIT_AI_API_KEY=your-api-key
-COOL_COMMIT_AI_MODEL=qwen-turbo
 COOL_COMMIT_LANG=zh
 ```
 
-如果需要覆盖默认接口地址：
+如果需要扩展自定义 provider，可以通过 `COOL_COMMIT_AI_PROVIDER_PRESETS` 传入 JSON，默认如下：
 
 ```env
-COOL_COMMIT_AI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
-```
-
-如果需要扩展自定义 provider，可以通过 `COOL_COMMIT_AI_PROVIDER_PRESETS` 传入 JSON：
-
-```env
-COOL_COMMIT_AI_PROVIDER_PRESETS={"deepseek":{"baseURL":"https://api.deepseek.com/v1","model":"deepseek-chat"},"myproxy":{"baseURL":"https://your-proxy.example.com/v1","model":"gpt-4o-mini"}}
+COOL_COMMIT_AI_PROVIDER_PRESETS='{
+  "dashscope": {
+    "baseURL": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "model": "qwen-turbo"
+  },
+  "openai": {
+    "baseURL": "https://api.openai.com/v1",
+    "model": "gpt-4o-mini"
+  },
+  "openrouter": {
+    "baseURL": "https://openrouter.ai/api/v1",
+    "model": "openai/gpt-4o-mini"
+  }
+}'
 ```
 
 然后直接切换：
 
 ```env
-COOL_COMMIT_AI_PROVIDER=deepseek
+COOL_COMMIT_AI_PROVIDER=openai
 COOL_COMMIT_AI_API_KEY=your-api-key
 ```
 
@@ -51,7 +57,6 @@ COOL_COMMIT_AI_API_KEY=your-api-key
     ```
     export COOL_COMMIT_AI_PROVIDER="openai"
     export COOL_COMMIT_AI_API_KEY="api-key"
-    export COOL_COMMIT_AI_MODEL="gpt-4o-mini"
     export COOL_COMMIT_LANG="en"
 
     ```
@@ -64,14 +69,12 @@ COOL_COMMIT_AI_API_KEY=your-api-key
  ```
     $env:COOL_COMMIT_AI_PROVIDER="openai"
     $env:COOL_COMMIT_AI_API_KEY="你的-api-key"
-    $env:COOL_COMMIT_AI_MODEL="gpt-4o-mini"
     $env:COOL_COMMIT_LANG="zh"
  ```
 如果想长期生效，可以执行：
  ```
     [System.Environment]::SetEnvironmentVariable("COOL_COMMIT_AI_PROVIDER", "openai", "User")
     [System.Environment]::SetEnvironmentVariable("COOL_COMMIT_AI_API_KEY", "你的-api-key", "User")
-    [System.Environment]::SetEnvironmentVariable("COOL_COMMIT_AI_MODEL", "gpt-4o-mini", "User")
     [System.Environment]::SetEnvironmentVariable("COOL_COMMIT_LANG", "zh", "User")
  ```
 
